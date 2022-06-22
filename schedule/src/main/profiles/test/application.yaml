@@ -1,14 +1,7 @@
 server:
     port: 8080
-    servlet:
-        encoding:
-            force: true
-            enabled: true
-            charset: UTF-8
-
 management:
     port: 7002
-
 spring:
     jpa:
         hibernate:
@@ -20,9 +13,5 @@ spring:
         view:
             prefix: /WEB-INF/jsp/
             suffix: .jsp
-        pathmatch:
-            matching-strategy: ant_path_matcher
     profiles:
-        active: dev
-    main:
-        allow-bean-definition-overriding: true
+        active: test

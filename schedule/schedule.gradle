@@ -1,0 +1,44 @@
+plugins {
+    id 'org.springframework.boot' version "$springBootVersion"
+}
+
+//构建可执行jar/war包
+configurations {
+    providedRuntime
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+//只对gradle spring-boot:run 有效
+ext {
+    applicationDefaultJvmArgs = ['-Xmx512M']
+}
+
+dependencies {
+    api project(":common-core")
+    api project(":frame")
+
+    api libraries.springboot_starter_web
+    api libraries.jolokia
+
+    //web
+    api "org.sitemesh:sitemesh:$sitemeshVersion"
+    api "org.webjars:bootstrap:$webBootstrapVersion"
+    api "org.webjars:jquery:$webJqueryVersion"
+
+}
+
+//profile环境配置文件
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["src/main/resources/", "src/main/profiles/${profile}"]
+        }
+    }
+}
